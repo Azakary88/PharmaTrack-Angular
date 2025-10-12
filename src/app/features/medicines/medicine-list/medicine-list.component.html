@@ -2,7 +2,7 @@
 <app-medicine-form  [medicineToEdit]="selectedMedicine"></app-medicine-form>
 <app-sales-recorder></app-sales-recorder>
 <div class="container">
-  <h2>Liste des Médicaments</h2>
+  <h3>Liste des Médicaments</h3>
 
   <div *ngIf="medicines$ | async as medicines; else loading">
     <table *ngIf="medicines.length > 0; else noMedicines">
@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let med of medicines">
+        <tr *ngFor="let med of medicines" [ngClass]="{ 'low-stock': med.quantity < 10 }">
           <td>{{ med.name }}</td>
           <td>{{ med.category }}</td>
           <td>{{ med.price }} FCFA</td>

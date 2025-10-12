@@ -1,0 +1,46 @@
+/* src/app/core/navigation/navbar/navbar.component.css */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3f51b5; /* Couleur primaire */
+  padding: 0 20px;
+  color: white;
+  height: 60px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.navbar-brand a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.navbar-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.navbar-links li {
+  padding: 0 15px;
+}
+
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1em;
+  transition: opacity 0.3s;
+}
+
+.navbar-links a:hover {
+  opacity: 0.8;
+}
+
+/* Cette classe sera ajoutée par routerLinkActive */
+.active-link {
+  border-bottom: 3px solid #ff4081; /* Couleur d'accentuation */
+  padding-bottom: 5px;
+}

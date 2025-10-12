@@ -1,0 +1,43 @@
+<!-- src/app/features/dashboard/dashboard/dashboard.component.html -->
+<div class="dashboard-container">
+  <h1>Tableau de Bord</h1>
+
+  <div class="dashboard-grid">
+    <!-- Section pour les alertes de stock -->
+    <div class="dashboard-card">
+      <h2>Alertes de Stock Faible (< 10)</h2>
+      <!-- On utilise notre nouvel observable avec le pipe async -->
+      <div *ngIf="lowStockMedicines$ | async as lowStockMeds; else loadingAlerts">
+        <ul *ngIf="lowStockMeds.length > 0; else noAlerts">
+          <li *ngFor="let med of lowStockMeds">
+            <strong>{{ med.name }}</strong> - Stock restant : {{ med.quantity }}
+          </li>
+        </ul>
+        <ng-template #noAlerts>
+          <p>Aucun médicament en rupture de stock. Excellent travail !</p>
+        </ng-template>
+      </div>
+      <ng-template #loadingAlerts>
+        <p>Chargement des alertes...</p>
+      </ng-template>
+    </div>
+
+    <!-- Carte pour le chiffre d'affaires -->
+    <div class="dashboard-card">
+    <h2>Chiffre d'affaires du jour</h2>
+    <!-- On utilise le pipe async et le pipe 'currency' pour formater le montant -->
+    <p class="stat-value">
+        {{ dailyRevenue$ | async | currency:'XOF':'symbol':'1.0-0' }}
+    </p>
+    </div>
+
+    <!-- Carte pour le nombre de ventes -->
+    <div class="dashboard-card">
+    <h2>Nombre de ventes du jour</h2>
+    <!-- On utilise simplement le pipe async -->
+    <p class="stat-value">
+        {{ dailySalesCount$ | async }}
+    </p>
+    </div>
+  </div>
+</div>

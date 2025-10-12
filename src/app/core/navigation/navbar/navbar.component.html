@@ -1,0 +1,16 @@
+<!-- src/app/core/navigation/navbar/navbar.component.html -->
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a routerLink="/dashboard">PharmaTrack</a>
+  </div>
+  <ul class="navbar-links">
+    <li>
+      <!-- routerLink est la directive d'Angular pour la navigation -->
+      <!-- routerLinkActive ajoute une classe CSS quand le lien est actif -->
+      <a routerLink="/dashboard" routerLinkActive="active-link">Tableau de Bord</a>
+    </li>
+    <li>
+      <a routerLink="/medicines" routerLinkActive="active-link">Gestion des Médicaments</a>
+    </li>
+  </ul>
+</nav>

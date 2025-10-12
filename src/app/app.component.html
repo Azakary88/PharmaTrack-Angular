@@ -1,1 +1,10 @@
-<router-outlet></router-outlet>
+<!-- src/app/app.component.html -->
+
+<!-- 1. On ajoute la barre de navigation en haut -->
+<app-navbar></app-navbar>
+
+<!-- 2. On met le contenu principal dans une balise 'main' pour la sémantique et le style -->
+<main class="main-content">
+  <!-- Le router-outlet affiche le composant de la page actuelle (Dashboard ou Medicines) -->
+  <router-outlet></router-outlet>
+</main>

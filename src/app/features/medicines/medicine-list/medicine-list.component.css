@@ -1,0 +1,7 @@
+/* src/app/features/medicines/medicine-list/medicine-list.component.css */
+
+.low-stock {
+  background-color: #ffebee; /* Un rouge très clair */
+  color: #b71c1c; /* Un rouge foncé pour le texte */
+  font-weight: bold; /* On met le texte en gras pour attirer l'attention */
+}
