@@ -5,12 +5,17 @@ import { Observable, map } from 'rxjs';
 import { Medicine } from '../../../shared/models/medicine.model';
 import { MedicineService } from '../../../core/services/medicine.service';
 import { Sale } from '../../../shared/models/sale.model';
-import { SalesService } from '../../../core/services/sales.service'; // Assurez-vous que ce service existe
+import { SalesService } from '../../../core/services/sales.service';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    NgxChartsModule
+  ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
@@ -21,6 +26,7 @@ export class DashboardComponent implements OnInit {
   // Nouveaux observables pour nos statistiques
   public dailyRevenue$!: Observable<number>;
   public dailySalesCount$!: Observable<number>;
+  public salesChartData: any[] = [];
 
   constructor(
     private medicineService: MedicineService,
@@ -37,7 +43,7 @@ export class DashboardComponent implements OnInit {
       )
     );
 
-    // 4. On utilise l'observable 'sales$' du service
+    // On utilise l'observable 'sales$' du service
     const todaysSales$ = this.salesService.sales$.pipe(
       map(sales => {
         const today = new Date();
@@ -48,7 +54,7 @@ export class DashboardComponent implements OnInit {
       })
     );
 
-    // 5. On calcule le chiffre d'affaires du jour
+    //  On calcule le chiffre d'affaires du jour
     this.dailyRevenue$ = todaysSales$.pipe(
       map(sales => 
         // On utilise reduce pour additionner le 'totalPrice' de chaque vente
@@ -56,9 +62,38 @@ export class DashboardComponent implements OnInit {
       )
     );
 
-    // 6. On calcule le nombre de ventes du jour
+    //  On calcule le nombre de ventes du jour
     this.dailySalesCount$ = todaysSales$.pipe(
       map(sales => sales.length) // C'est simplement la longueur du tableau des ventes du jour
     );
+
+    
+    this.salesService.sales$.subscribe(sales => {
+      const weeklySales = [
+        { name: 'Dim', value: 0 }, { name: 'Lun', value: 0 }, { name: 'Mar', value: 0 },
+        { name: 'Mer', value: 0 }, { name: 'Jeu', value: 0 }, { name: 'Ven', value: 0 },
+        { name: 'Sam', value: 0 }
+      ];
+
+      if (Array.isArray(sales)) {
+        sales.forEach(sale => {
+          const saleDate = new Date(sale.saleDate);
+          if (!isNaN(saleDate.getTime())) {
+            const saleDay = saleDate.getDay();
+            const price = sale.totalPrice;
+            if (typeof price === 'number' && !isNaN(price)) {
+              weeklySales[saleDay].value += price;
+            }
+          }
+        });
+      }
+
+      //  On assigne le résultat final à notre propriété de classe.
+      // L'astuce [...weeklySales] force Angular à détecter le changement.
+        setTimeout(() => {
+        this.salesChartData = [...weeklySales];
+        console.log("Données assignées au graphique (avec setTimeout):", this.salesChartData);
+      }, 0);
+    });
   }
 }

@@ -39,5 +39,33 @@
         {{ dailySalesCount$ | async }}
     </p>
     </div>
+
+    <div class="dashboard-card chart-card">
+    <h2>Ventes de la semaine</h2>
+
+    <!-- 
+        On ajoute une condition *ngIf.
+        Le graphique ne sera ajouté au DOM que si 'salesChartData' existe ET a une longueur > 0.
+        Cela empêche le premier rendu "à vide" qui causait l'erreur.
+    -->
+    <div *ngIf="salesChartData && salesChartData.length > 0" style="height: 400px;">
+        <ngx-charts-bar-vertical
+        [results]="salesChartData"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="false"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        xAxisLabel="Jour"
+        yAxisLabel="Chiffre d'affaires (FCFA)">
+        </ngx-charts-bar-vertical>
+    </div>
+
+    <!-- On peut même ajouter un message de chargement -->
+    <div *ngIf="!salesChartData || salesChartData.length === 0">
+        <p>Calcul des statistiques...</p>
+    </div>
+    </div>
+
   </div>
 </div>

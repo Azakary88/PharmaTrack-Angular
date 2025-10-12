@@ -30,3 +30,9 @@
 ul {
   padding-left: 20px;
 }
+
+.chart-card {
+  /* Fait en sorte que la carte du graphique prenne toute la largeur */
+  grid-column: 1 / -1; 
+}
+
