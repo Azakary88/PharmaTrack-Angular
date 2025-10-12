@@ -1,0 +1,26 @@
+<!-- src/app/features/sales/sales-recorder/sales-recorder.component.html -->
+<div class="sales-container">
+  <h3>Enregistrer une Vente</h3>
+  <form [formGroup]="saleForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="medicine">Médicament</label>
+      <select id="medicine" formControlName="medicineId">
+        <!-- L'option change pour refléter l'état de chargement -->
+        <option [ngValue]="null" disabled>
+          {{ saleForm.get('medicineId')?.disabled ? 'Chargement...' : '-- Choisir un médicament --' }}
+        </option>
+        <option *ngFor="let med of medicines$ | async" [ngValue]="med.id">
+          {{ med.name }} (Stock: {{ med.quantity }})
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="quantity">Quantité</label>
+      <input id="quantity" type="number" formControlName="quantity">
+    </div>
+
+    <!-- Le bouton est aussi désactivé si le formulaire est invalide (ce qui est le cas si le select est désactivé) -->
+    <button type="submit" [disabled]="saleForm.invalid">Enregistrer la vente</button>
+  </form>
+</div>

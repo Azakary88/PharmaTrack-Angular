@@ -1,0 +1,69 @@
+<!-- src/app/features/medicines/medicine-form/medicine-form.component.html -->
+<div class="form-container">
+  <!-- Le titre change en fonction du mode -->
+  <h3>{{ isEditMode ? 'Modifier le médicament' : 'Ajouter un nouveau médicament' }}</h3>
+
+  <!-- On lie le formulaire HTML au FormGroup avec [formGroup] -->
+  <!-- (ngSubmit) est l'événement qui se déclenche à la soumission -->
+  <form [formGroup]="medicineForm" (ngSubmit)="onSubmit()">
+
+    <!-- Champ Nom -->
+    <div class="form-group">
+      <label for="name">Nom</label>
+      <input id="name" type="text" formControlName="name">
+      <!-- Message d'erreur -->
+      <div *ngIf="medicineForm.get('name')?.invalid && medicineForm.get('name')?.touched" class="error">
+        Le nom est obligatoire.
+      </div>
+    </div>
+
+    <!-- Champ Catégorie -->
+    <div class="form-group">
+      <label for="category">Catégorie</label>
+      <input id="category" type="text" formControlName="category">
+      <div *ngIf="medicineForm.get('category')?.invalid && medicineForm.get('category')?.touched" class="error">
+        La catégorie est obligatoire.
+      </div>
+    </div>
+
+    <!-- Champ Prix -->
+    <div class="form-group">
+      <label for="price">Prix (FCFA)</label>
+      <input id="price" type="number" formControlName="price">
+      <div *ngIf="medicineForm.get('price')?.errors?.['required'] && medicineForm.get('price')?.touched" class="error">
+        Le prix est obligatoire.
+      </div>
+      <div *ngIf="medicineForm.get('price')?.errors?.['min'] && medicineForm.get('price')?.touched" class="error">
+        Le prix doit être supérieur à 0.
+      </div>
+    </div>
+
+    <!-- Champ Quantité -->
+    <div class="form-group">
+      <label for="quantity">Quantité en stock</label>
+      <input id="quantity" type="number" formControlName="quantity">
+       <div *ngIf="medicineForm.get('quantity')?.invalid && medicineForm.get('quantity')?.touched" class="error">
+        La quantité est obligatoire.
+      </div>
+    </div>
+
+    <!-- Champ Date d'expiration -->
+    <div class="form-group">
+      <label for="expirationDate">Date d'expiration</label>
+      <input id="expirationDate" type="date" formControlName="expirationDate">
+       <div *ngIf="medicineForm.get('expirationDate')?.invalid && medicineForm.get('expirationDate')?.touched" class="error">
+        La date est obligatoire.
+      </div>
+    </div>
+
+    <!-- Le texte du bouton change en fonction du mode -->
+    <button type="submit" [disabled]="medicineForm.invalid">
+      {{ isEditMode ? 'Mettre à jour' : 'Ajouter le médicament' }}
+    </button>
+
+    <!-- On ajoute un bouton pour annuler l'édition -->
+    <button type="button" *ngIf="isEditMode" (click)="resetForm()">
+      Annuler
+    </button>
+  </form>
+</div>

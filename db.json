@@ -1,0 +1,114 @@
+{
+  "medicines": [
+    {
+      "id": "2",
+      "name": "Amoxicilline 250mg",
+      "category": "Antibiotique",
+      "price": 3500,
+      "quantity": 6,
+      "expirationDate": "2025-11-30"
+    },
+    {
+      "id": "3",
+      "name": "Vitamine C",
+      "category": "Supplément",
+      "price": 2500,
+      "quantity": 120,
+      "expirationDate": "2027-05-20"
+    },
+    {
+      "id": "a6e1",
+      "name": "Lumarthem pour enfant",
+      "category": "antipalu",
+      "price": 300,
+      "quantity": 94,
+      "expirationDate": "2026-10-10"
+    }
+  ],
+  "sales": [
+    {
+      "id": "1",
+      "medicineId": 1,
+      "quantity": 2,
+      "saleDate": "2025-10-08T10:00:00Z",
+      "totalPrice": 3000
+    },
+    {
+      "id": "2",
+      "medicineId": 3,
+      "quantity": 1,
+      "saleDate": "2025-10-08T12:30:00Z",
+      "totalPrice": 2500
+    },
+    {
+      "id": "f86a",
+      "medicineId": null,
+      "quantity": 1,
+      "saleDate": "2025-10-10T18:39:28.042Z",
+      "totalPrice": 1500
+    },
+    {
+      "id": "12b5",
+      "medicineId": "2",
+      "quantity": 1,
+      "saleDate": "2025-10-10T18:39:43.577Z",
+      "totalPrice": 3500
+    },
+    {
+      "id": "bb7c",
+      "medicineId": "a6e1",
+      "quantity": 6,
+      "saleDate": "2025-10-10T18:39:54.859Z",
+      "totalPrice": 1800
+    },
+    {
+      "id": "e04b",
+      "medicineId": null,
+      "quantity": 1,
+      "saleDate": "2025-10-11T13:23:24.235Z",
+      "totalPrice": 1500
+    },
+    {
+      "id": "fdab",
+      "medicineId": null,
+      "quantity": 1,
+      "saleDate": "2025-10-11T13:23:34.982Z",
+      "totalPrice": 1500
+    },
+    {
+      "id": "70de",
+      "medicineId": null,
+      "quantity": 1,
+      "saleDate": "2025-10-11T13:30:11.640Z",
+      "totalPrice": 1500
+    },
+    {
+      "id": "9471",
+      "medicineId": "2",
+      "quantity": 1,
+      "saleDate": "2025-10-11T13:30:26.532Z",
+      "totalPrice": 3500
+    },
+    {
+      "id": "5541",
+      "medicineId": null,
+      "quantity": 10,
+      "saleDate": "2025-10-11T23:39:11.246Z",
+      "totalPrice": 1000
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "password123",
+      "role": "Admin"
+    },
+    {
+      "id": "2",
+      "username": "user",
+      "password": "password123",
+      "role": "User"
+    }
+  ]
+}

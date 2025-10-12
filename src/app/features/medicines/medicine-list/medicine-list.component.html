@@ -1,0 +1,41 @@
+<!-- src/app/features/medicines/medicine-list/medicine-list.component.html -->
+<app-medicine-form  [medicineToEdit]="selectedMedicine"></app-medicine-form>
+<app-sales-recorder></app-sales-recorder>
+<div class="container">
+  <h2>Liste des Médicaments</h2>
+
+  <div *ngIf="medicines$ | async as medicines; else loading">
+    <table *ngIf="medicines.length > 0; else noMedicines">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Catégorie</th>
+          <th>Prix</th>
+          <th>Stock</th>
+          <th>Date d'expiration</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let med of medicines">
+          <td>{{ med.name }}</td>
+          <td>{{ med.category }}</td>
+          <td>{{ med.price }} FCFA</td>
+          <td>{{ med.quantity }}</td>
+          <td>{{ med.expirationDate | date: 'dd/MM/yyyy' }}</td>
+          <td>
+            <button (click)="onEdit(med)">Modifier</button>
+            <button (click)="onDelete(med.id)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #noMedicines>
+      <p>Aucun médicament trouvé.</p>
+    </ng-template>
+  </div>
+
+  <ng-template #loading>
+    <p>Chargement des données...</p>
+  </ng-template>
+</div>
