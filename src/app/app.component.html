@@ -1,10 +1,8 @@
 <!-- src/app/app.component.html -->
 
-<!-- 1. On ajoute la barre de navigation en haut -->
-<app-navbar></app-navbar>
+<!-- On importe le service et on utilise *ngIf pour afficher la barre de navigation uniquement si l'utilisateur est connecté -->
+<app-navbar *ngIf="(authService.isLoggedIn$ | async)"></app-navbar>
 
-<!-- 2. On met le contenu principal dans une balise 'main' pour la sémantique et le style -->
 <main class="main-content">
-  <!-- Le router-outlet affiche le composant de la page actuelle (Dashboard ou Medicines) -->
   <router-outlet></router-outlet>
 </main>

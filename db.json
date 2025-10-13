@@ -13,7 +13,7 @@
       "name": "Vitamine C",
       "category": "Supplément",
       "price": 2500,
-      "quantity": 57,
+      "quantity": 46,
       "expirationDate": "2027-05-20"
     },
     {
@@ -29,8 +29,16 @@
       "name": "Paracetamol",
       "category": "Antibiotique",
       "price": 100,
-      "quantity": 9,
+      "quantity": 25,
       "expirationDate": "2027-12-25"
+    },
+    {
+      "id": "ef4c",
+      "name": "Penicilline ",
+      "category": "Antibiotique",
+      "price": 500,
+      "quantity": 75,
+      "expirationDate": "2029-12-31"
     }
   ],
   "sales": [
@@ -124,6 +132,27 @@
       "quantity": 20,
       "saleDate": "2025-10-12T12:50:41.561Z",
       "totalPrice": 6000
+    },
+    {
+      "id": "05b9",
+      "medicineId": "3",
+      "quantity": 10,
+      "saleDate": "2025-10-13T00:30:33.767Z",
+      "totalPrice": 25000
+    },
+    {
+      "id": "1afe",
+      "medicineId": "ef4c",
+      "quantity": 45,
+      "saleDate": "2025-10-13T13:09:19.653Z",
+      "totalPrice": 22500
+    },
+    {
+      "id": "6e2e",
+      "medicineId": "3",
+      "quantity": 1,
+      "saleDate": "2025-10-13T13:09:57.684Z",
+      "totalPrice": 2500
     }
   ],
   "users": [
