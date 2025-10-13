@@ -5,7 +5,7 @@
       "name": "Amoxicilline 250mg",
       "category": "Antibiotique",
       "price": 3500,
-      "quantity": 6,
+      "quantity": 5,
       "expirationDate": "2025-11-30"
     },
     {
@@ -153,6 +153,13 @@
       "quantity": 1,
       "saleDate": "2025-10-13T13:09:57.684Z",
       "totalPrice": 2500
+    },
+    {
+      "id": "2657",
+      "medicineId": "2",
+      "quantity": 1,
+      "saleDate": "2025-10-13T13:40:32.779Z",
+      "totalPrice": 3500
     }
   ],
   "users": [
