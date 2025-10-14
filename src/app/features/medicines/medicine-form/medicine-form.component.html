@@ -56,14 +56,11 @@
       </div>
     </div>
 
-    <!-- Le texte du bouton change en fonction du mode -->
-    <button type="submit" [disabled]="medicineForm.invalid">
-      {{ isEditMode ? 'Mettre à jour' : 'Ajouter le médicament' }}
-    </button>
-
-    <!-- On ajoute un bouton pour annuler l'édition -->
-    <button type="button" *ngIf="isEditMode" (click)="resetForm()">
-      Annuler
-    </button>
+    <div class="form-actions">
+      <button type="button" (click)="cancel()">Annuler</button>
+      <button type="submit" [disabled]="medicineForm.invalid">
+        {{ isEditMode ? 'Mettre à jour' : 'Ajouter' }}
+      </button>
+    </div>
   </form>
 </div>

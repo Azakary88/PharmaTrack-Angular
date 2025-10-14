@@ -10,7 +10,7 @@
     },
     {
       "id": "3",
-      "name": "Vitamine C",
+      "name": "Vitamine C1",
       "category": "Supplément",
       "price": 2500,
       "quantity": 46,
@@ -18,7 +18,7 @@
     },
     {
       "id": "a6e1",
-      "name": "Lumarthem pour enfant",
+      "name": "Lumarthem pour enfant 1",
       "category": "antipalu",
       "price": 300,
       "quantity": 74,
@@ -39,6 +39,46 @@
       "price": 500,
       "quantity": 75,
       "expirationDate": "2029-12-31"
+    },
+    {
+      "id": "e361",
+      "name": "Bande 10cm",
+      "category": "hygiène",
+      "price": 150,
+      "quantity": 25,
+      "expirationDate": "2028-03-15"
+    },
+    {
+      "id": "cfa9",
+      "name": "Déparasitant ",
+      "category": "hygiène",
+      "price": 200,
+      "quantity": 10,
+      "expirationDate": "2026-02-15"
+    },
+    {
+      "id": "6a74",
+      "name": "Déparasitant 5",
+      "category": "hygiène",
+      "price": 200,
+      "quantity": 10,
+      "expirationDate": "2026-02-15"
+    },
+    {
+      "id": "dcd8",
+      "name": "Vitamine C1",
+      "category": "Supplément",
+      "price": 2500,
+      "quantity": 46,
+      "expirationDate": "2027-05-20"
+    },
+    {
+      "id": "2e9e",
+      "name": "Lumarthem pour enfant 1",
+      "category": "antipalu",
+      "price": 300,
+      "quantity": 74,
+      "expirationDate": "2026-10-10"
     }
   ],
   "sales": [

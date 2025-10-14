@@ -1,8 +1,10 @@
 <!-- src/app/features/medicines/medicine-list/medicine-list.component.html -->
-<app-medicine-form  [medicineToEdit]="selectedMedicine"></app-medicine-form>
-<app-sales-recorder></app-sales-recorder>
 <div class="container">
-  <h3>Liste des Médicaments</h3>
+  <div class="header">
+    <h2>Liste des Médicaments</h2>
+    <!-- 1. Le bouton qui va ouvrir la modale pour l'ajout -->
+    <button (click)="openAddModal()">Ajouter un médicament</button>
+  </div>
 
   <div *ngIf="medicines$ | async as medicines; else loading">
     <table *ngIf="medicines.length > 0; else noMedicines">
@@ -16,14 +18,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let med of medicines" [ngClass]="{ 'low-stock': med.quantity < 10 }">
+        <tr *ngFor="let med of medicines$ | async" [ngClass]="{ 'low-stock': med.quantity < 10 }">
           <td>{{ med.name }}</td>
           <td>{{ med.category }}</td>
           <td>{{ med.price }} FCFA</td>
           <td>{{ med.quantity }}</td>
           <td>{{ med.expirationDate | date: 'dd/MM/yyyy' }}</td>
           <td>
-            <button (click)="onEdit(med)">Modifier</button>
+            <button (click)="openEditModal(med)">Modifier</button>
             <button (click)="onDelete(med.id)">Supprimer</button>
           </td>
         </tr>
@@ -39,3 +41,9 @@
     <p>Chargement des données...</p>
   </ng-template>
 </div>
+<dialog #formDialog>
+  <app-medicine-form 
+    [medicineToEdit]="selectedMedicine" 
+    (formClosed)="closeModal()">
+  </app-medicine-form>
+</dialog>

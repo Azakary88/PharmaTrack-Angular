@@ -1,5 +1,5 @@
 // src/app/features/medicines/medicine-form/medicine-form.component.ts
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MedicineService } from '../../../core/services/medicine.service';
@@ -16,11 +16,11 @@ import { Medicine } from '../../../shared/models/medicine.model';
   styleUrls: ['./medicine-form.component.css']
 })
 export class MedicineFormComponent implements OnChanges {
-  // 1. On crée un @Input pour recevoir le médicament à éditer.
   @Input() medicineToEdit: Medicine | null = null;
+  @Output() formClosed = new EventEmitter<void>();
 
   medicineForm: FormGroup;
-  isEditMode = false; // 2. Un booléen pour savoir si on est en mode édition.
+  isEditMode = false;
 
   constructor(private fb: FormBuilder, private medicineService: MedicineService) {
     this.medicineForm = this.fb.group({
@@ -32,48 +32,51 @@ export class MedicineFormComponent implements OnChanges {
       expirationDate: ['', Validators.required]
     });
   }
-
-  // 4. Cette méthode est appelée chaque fois qu'un @Input change.
-  ngOnChanges(changes: SimpleChanges): void {
-    // Si 'medicineToEdit' a changé et n'est pas null...
-    if (changes['medicineToEdit'] && this.medicineToEdit) {
-      this.isEditMode = true;
-      // 5. On remplit le formulaire avec les données du médicament.
-      // patchValue est pratique car il ne se soucie pas si toutes les clés sont présentes.
-      this.medicineForm.patchValue(this.medicineToEdit);
-    }
+ public reset(): void {
+    this.isEditMode = false;
+    this.medicineForm.reset();
   }
+    ngOnChanges(changes: SimpleChanges): void {
+      // On vérifie si la propriété 'medicineToEdit' a changé
+      if (changes['medicineToEdit']) {
+        if (this.medicineToEdit) {
+          // Si on reçoit un médicament, on passe en mode édition
+          this.isEditMode = true;
+          this.medicineForm.patchValue(this.medicineToEdit);
+        } else {
+          // Si on ne reçoit RIEN (null), on passe en mode ajout et on nettoie le formulaire
+          this.isEditMode = false;
+          this.medicineForm.reset(); 
+          this.reset;
+        }
+      }
+    }
+
 
   onSubmit(): void {
-    if (this.medicineForm.invalid) {
-      this.medicineForm.markAllAsTouched();
-      return;
-    }
+    if (this.medicineForm.invalid) { return; }
 
-    // 6. On vérifie si on est en mode édition ou en mode ajout.
-    if (this.isEditMode) {
-      // On appelle le service de mise à jour.
-      this.medicineService.updateMedicine(this.medicineForm.value).subscribe({
-        next: () => {
-          console.log('Médicament mis à jour avec succès !');
-          this.resetForm();
-        }
-      });
-    } else {
-      // On appelle le service d'ajout (logique existante).
-      this.medicineService.addMedicine(this.medicineForm.value).subscribe({
-        next: () => {
-          console.log('Médicament ajouté avec succès !');
-          this.resetForm();
-        }
-      });
-    }
+    const action$ = this.isEditMode
+      ? this.medicineService.updateMedicine(this.medicineForm.value)
+      : this.medicineService.addMedicine(this.medicineForm.value);
+
+    action$.subscribe({
+      next: () => {
+        console.log(this.isEditMode ? 'Mise à jour réussie' : 'Ajout réussi');
+        this.formClosed.emit(); // On demande juste la fermeture
+      }
+    });
   }
 
-  // 7. Une méthode pour réinitialiser le formulaire et le mode.
-  resetForm(): void {
-    this.medicineForm.reset();
-    this.isEditMode = false;
-    this.medicineToEdit = null;
+  cancel(): void {
+    this.formClosed.emit();
+  }
+  
+  // --- NOUVELLE MÉTHODE DE RÉINITIALISATION ---
+  private resetForm(): void {
+    this.medicineForm.reset(); // Réinitialise les valeurs du formulaire
+    this.isEditMode = false;   // Repasse en mode "ajout"
   }
 }
+
+
