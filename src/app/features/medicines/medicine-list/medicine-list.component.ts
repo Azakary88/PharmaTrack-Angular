@@ -2,12 +2,15 @@
 
 // --- PARTIE 1 : LES IMPORTS ---
 // On s'assure d'avoir tous les imports nécessaires
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { Medicine } from '../../../shared/models/medicine.model';
 import { MedicineService } from '../../../core/services/medicine.service';
 import { MedicineFormComponent } from '../medicine-form/medicine-form.component';
+
 
 // --- PARTIE 2 : LE DÉCORATEUR @Component (À NE PAS SUPPRIMER) ---
 // C'est ce bloc qui définit le composant.
@@ -15,28 +18,51 @@ import { MedicineFormComponent } from '../medicine-form/medicine-form.component'
   selector: 'app-medicine-list',
   standalone: true,
   imports: [
-    CommonModule, 
+    CommonModule,
+    FormsModule, 
     MedicineFormComponent,
-    // On peut supprimer SalesRecorderComponent si on ne l'utilise plus ici
   ],
   templateUrl: './medicine-list.component.html',
   styleUrls: ['./medicine-list.component.css']
 })
 
-// --- PARTIE 3 : LA CLASSE DU COMPOSANT ---
-// C'est ici qu'on met toute la logique (les propriétés et les méthodes).
-export class MedicineListComponent {
-  // Propriétés
-  public medicines$: Observable<Medicine[]>;
-  public selectedMedicine: Medicine | null = null;
+export class MedicineListComponent implements OnInit {
+    // Observable qui contiendra la liste des médicaments filtrés
+    public filteredMedicines$!: Observable<Medicine[]>;
+    
+    // Un sujet pour contenir le terme de recherche actuel
+    public searchTerm = new BehaviorSubject<string>('');
 
-  @ViewChild(MedicineFormComponent) medicineForm!: MedicineFormComponent;
-  @ViewChild('formDialog') formDialog!: ElementRef<HTMLDialogElement>;
+    public selectedMedicine: Medicine | null = null;
+    @ViewChild(MedicineFormComponent) medicineForm!: MedicineFormComponent;
+    @ViewChild('formDialog') formDialog!: ElementRef<HTMLDialogElement>;
 
-  // Constructeur
-  constructor(private medicineService: MedicineService) {
-    this.medicines$ = this.medicineService.medicines$;
-  }
+    constructor(private medicineService: MedicineService) {}
+
+    // 7. Utiliser le hook ngOnInit pour initialiser la logique de filtrage
+    ngOnInit(): void {
+      // On combine le flux de tous les médicaments avec le flux du terme de recherche
+      this.filteredMedicines$ = combineLatest([
+        this.medicineService.medicines$, // Le tableau complet des médicaments
+        this.searchTerm.asObservable().pipe(startWith('')) // Le terme de recherche
+      ]).pipe(
+        map(([medicines, term]) => {
+          // Si le terme est vide, on retourne toute la liste
+          if (!term) {
+            return medicines;
+          }
+          // Sinon, on filtre la liste
+          return medicines.filter(med => 
+            med.name.toLowerCase().includes(term.toLowerCase())
+          );
+        })
+      );
+    }
+
+    // 8. Méthode appelée à chaque changement dans le champ de recherche
+    onSearchChange(term: string): void {
+      this.searchTerm.next(term);
+    }
 
   // Méthodes
    openAddModal(): void {
@@ -71,3 +97,4 @@ export class MedicineListComponent {
     }
   }
 }
+

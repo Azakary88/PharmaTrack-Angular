@@ -5,7 +5,7 @@
       "name": "Amoxicilline 250mg",
       "category": "Antibiotique",
       "price": 3500,
-      "quantity": 5,
+      "quantity": 25,
       "expirationDate": "2025-11-30"
     },
     {
@@ -13,7 +13,7 @@
       "name": "Vitamine C1",
       "category": "Supplément",
       "price": 2500,
-      "quantity": 46,
+      "quantity": 35,
       "expirationDate": "2027-05-20"
     },
     {
@@ -77,8 +77,16 @@
       "name": "Lumarthem pour enfant 1",
       "category": "antipalu",
       "price": 300,
-      "quantity": 74,
+      "quantity": 30,
       "expirationDate": "2026-10-10"
+    },
+    {
+      "id": "7db6",
+      "name": "dichlophenac",
+      "category": "Antibiotique",
+      "price": 50,
+      "quantity": 100,
+      "expirationDate": "12026-03-12"
     }
   ],
   "sales": [
@@ -200,6 +208,27 @@
       "quantity": 1,
       "saleDate": "2025-10-13T13:40:32.779Z",
       "totalPrice": 3500
+    },
+    {
+      "id": "2174",
+      "medicineId": "3",
+      "quantity": 10,
+      "saleDate": "2025-10-14T14:54:23.889Z",
+      "totalPrice": 25000
+    },
+    {
+      "id": "66e7",
+      "medicineId": "2e9e",
+      "quantity": 70,
+      "saleDate": "2025-10-14T14:55:20.924Z",
+      "totalPrice": 21000
+    },
+    {
+      "id": "9767",
+      "medicineId": "3",
+      "quantity": 1,
+      "saleDate": "2025-10-15T06:13:35.658Z",
+      "totalPrice": 2500
     }
   ],
   "users": [

@@ -1,52 +1,48 @@
 // src/app/app.routes.ts
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
+import { adminGuard } from './core/guards/admin.guard';
 
 export const routes: Routes = [
+  // --- Routes d'Authentification ---
+  {
+    path: 'login',
+    loadComponent: () => import('./features/auth/login/login.component').then(m => m.LoginComponent)
+  },
 
-    {
-      path: 'login',
-      loadComponent: () => import('./features/auth/login/login.component').then(m => m.LoginComponent)
-    },
-    {
-      path: 'dashboard',
-      loadComponent: () => import('./features/dashboard/dashboard/dashboard.component').then(m => m.DashboardComponent),
-      canActivate: [authGuard] //  Appliquer le garde à cette route
-    },
-    {
-      path: 'medicines',
-      loadComponent: () => import('./features/medicines/medicine-list/medicine-list.component').then(m => m.MedicineListComponent),
-      canActivate: [authGuard] //  Appliquer aussi le garde ici
-    },
-   
+  // --- Routes de l'Application (protégées) ---
+  {
+    path: 'dashboard',
+    loadComponent: () => import('./features/dashboard/dashboard/dashboard.component').then(m => m.DashboardComponent),
+    // Seuls les utilisateurs connectés peuvent y accéder
+    canActivate: [authGuard] 
+  },
+  {
+    path: 'sales',
+    loadComponent: () => import('./features/sales/sales-page/sales-page.component').then(m => m.SalesPageComponent),
+    // Seuls les utilisateurs connectés peuvent y accéder
+    canActivate: [authGuard]
+  },
+  {
+    path: 'medicines',
+    loadComponent: () => import('./features/medicines/medicine-list/medicine-list.component').then(m => m.MedicineListComponent),
+    // D'abord, on vérifie si l'utilisateur est connecté.
+    // Ensuite, on vérifie s'il a le rôle 'Admin'.
+    canActivate: [authGuard, adminGuard] 
+  },
 
-    //  la route pour le login
-    {
-      path: 'login',
-      loadComponent: () => import('./features/auth/login/login.component').then(m => m.LoginComponent)
-    },
+  // --- Route par défaut ---
+  // Si l'URL est vide, redirige vers la page de connexion.
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
 
-    // On définit la route pour le dashboard
-    {
-      path: 'dashboard',
-      loadComponent: () =>
-        import('./features/dashboard/dashboard/dashboard.component').then(m => m.DashboardComponent)
-    },
-
-    // 1. Route pour afficher la liste des médicaments
-    // Quand l'URL est /medicines, charge le MedicineListComponent
-    {
-      path: 'medicines',
-      loadComponent: () =>
-        import('./features/medicines/medicine-list/medicine-list.component').then(m => m.MedicineListComponent)
-    },
-
-    // 2. Route par défaut (redirection)
-    // Quand l'URL est vide (page d'accueil), redirige vers /medicines
-    {
-      path: '',
-      redirectTo: 'login',
-      pathMatch: 'full'
-    },
-
-  ];
+  // Si l'URL ne correspond à aucune route ci-dessus, redirige vers le dashboard.
+  // Utile si un utilisateur connecté tape une URL incorrecte.
+  {
+    path: '**',
+    redirectTo: 'dashboard'
+  }
+];

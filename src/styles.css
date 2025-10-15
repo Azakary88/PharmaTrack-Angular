@@ -1,9 +1,45 @@
 /* src/styles.css */
+
+:root {
+  --primary-color: #3f51b5; /* Bleu */
+  --accent-color: #ff4081;  /* Rose */
+  --text-color: #333; /* Gris foncé pour le texte */
+  --background-color: #f5f5f5; /* Gris très clair pour le fond */
+  --card-background-color: #ffffff; /* Blanc pour les cartes */
+  --border-color: #e0e0e0; /* Gris clair pour les bordures */
+  --danger-color: #b71c1c; /* Rouge pour les messages d'erreur */
+  --danger-background-color: #ffebee; /* Rouge clair pour les fonds d'erreur */
+}
+
 body {
-  margin: 0;
+  margin: 0; 
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .main-content {
   padding: 20px;
+}
+
+/* Style global pour les boutons */
+button {
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+button:hover:not(:disabled) {
+  background-color: #303f9f; /* Une teinte plus foncée de bleu */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }

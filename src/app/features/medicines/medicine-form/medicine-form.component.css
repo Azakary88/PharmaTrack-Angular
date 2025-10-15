@@ -1,0 +1,35 @@
+/* src/app/features/medicines/medicine-form/medicine-form.component.css */
+.form-container {
+  padding: 32px;
+}
+
+h3 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+/* ... (le reste de vos styles de formulaire) ... */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end; /* Aligne les boutons à droite */
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* Style spécifique pour le bouton Annuler */
+.form-actions button[type="button"] {
+  background-color: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+.form-actions button[type="button"]:hover {
+  background-color: #f5f5f5;
+}
+/* Style spécifique pour le bouton Enregistrer */
+.form-actions button[type="submit"] {
+  background-color: var(--primary-color);
+  color: white;
+}

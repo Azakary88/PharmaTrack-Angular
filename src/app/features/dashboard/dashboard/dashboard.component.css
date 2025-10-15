@@ -2,29 +2,48 @@
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+  gap: 24px;
   margin-top: 20px;
 }
 
 .dashboard-card {
-  border: 1px solid #ccc;
+  background-color: rgb(213, 230, 223);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px); /* Effet de lévitation au survol */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .dashboard-card h2 {
   margin-top: 0;
-  border-bottom: 2px solid #eee;
-  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 16px;
+  font-size: 1.2em;
+  color: var(--primary-color);
 }
 
 .stat-value {
-  font-size: 2em;
+  font-size: 2.5em;
   font-weight: bold;
-  color: #3f51b5; /* Couleur primaire d'Angular Material, par exemple */
+  color: var(--text-color);
   text-align: center;
   margin: 20px 0;
+}
+
+.dashboard-card ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.dashboard-card li {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 ul {
@@ -35,4 +54,5 @@ ul {
   /* Fait en sorte que la carte du graphique prenne toute la largeur */
   grid-column: 1 / -1; 
 }
+
 

@@ -1,46 +1,63 @@
-<!-- src/app/features/medicines/medicine-list/medicine-list.component.html -->
+<!-- COLLEZ CE CODE DANS : src/app/features/medicines/medicine-list/medicine-list.component.html -->
+
 <div class="container">
   <div class="header">
     <h2>Liste des Médicaments</h2>
-    <!-- 1. Le bouton qui va ouvrir la modale pour l'ajout -->
     <button (click)="openAddModal()">Ajouter un médicament</button>
   </div>
 
-  <div *ngIf="medicines$ | async as medicines; else loading">
-    <table *ngIf="medicines.length > 0; else noMedicines">
-      <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Catégorie</th>
-          <th>Prix</th>
-          <th>Stock</th>
-          <th>Date d'expiration</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let med of medicines$ | async" [ngClass]="{ 'low-stock': med.quantity < 10 }">
-          <td>{{ med.name }}</td>
-          <td>{{ med.category }}</td>
-          <td>{{ med.price }} FCFA</td>
-          <td>{{ med.quantity }}</td>
-          <td>{{ med.expirationDate | date: 'dd/MM/yyyy' }}</td>
-          <td>
-            <button (click)="openEditModal(med)">Modifier</button>
-            <button (click)="onDelete(med.id)">Supprimer</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <ng-template #noMedicines>
-      <p>Aucun médicament trouvé.</p>
-    </ng-template>
+  <!-- Le formulaire de recherche que nous avons ajouté -->
+  <div class="search-container">
+    <form #searchForm="ngForm">
+      <input 
+        type="text" 
+        placeholder="Rechercher un médicament par nom..."
+        name="searchTermInput"
+        #searchTermInput="ngModel"
+        [ngModel]="searchTerm.value"
+        (ngModelChange)="onSearchChange($event)">
+    </form>
   </div>
 
+  <!-- La table qui utilise maintenant 'filteredMedicines$' -->
+  <table *ngIf="filteredMedicines$ | async as medicines; else loading">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Catégorie</th>
+        <th>Prix</th>
+        <th>Stock</th>
+        <th>Date d'expiration</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Message si la recherche ne donne aucun résultat -->
+      <tr *ngIf="medicines.length === 0">
+        <td colspan="6" class="no-results">Aucun médicament ne correspond à votre recherche.</td>
+      </tr>
+      <!-- La boucle *ngFor utilise la variable 'medicines' (sans $) -->
+      <tr *ngFor="let med of medicines" [ngClass]="{ 'low-stock': med.quantity < 10 }">
+        <td>{{ med.name }}</td>
+        <td>{{ med.category }}</td>
+        <td>{{ med.price }} FCFA</td>
+        <td>{{ med.quantity }}</td>
+        <td>{{ med.expirationDate | date: 'dd/MM/yyyy' }}</td>
+        <td>
+          <button  (click)="openEditModal(med)">Modifier</button>
+          <button class="delete-button" (click)="onDelete(med.id)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Message de chargement initial -->
   <ng-template #loading>
     <p>Chargement des données...</p>
   </ng-template>
 </div>
+
+<!-- La modale pour le formulaire (ne change pas) -->
 <dialog #formDialog>
   <app-medicine-form 
     [medicineToEdit]="selectedMedicine" 

@@ -3,9 +3,9 @@
   <h1>Tableau de Bord</h1>
 
   <div class="dashboard-grid">
-    <!-- Section pour les alertes de stock -->
+    <!-- Section pour les médicaments proches de la rupture -->
     <div class="dashboard-card">
-      <h2>Alertes de Stock Faible (< 10)</h2>
+      <h2> Médicaments proches de la rupture</h2>
       <!-- On utilise notre nouvel observable avec le pipe async -->
       <div *ngIf="lowStockMedicines$ | async as lowStockMeds; else loadingAlerts">
         <ul *ngIf="lowStockMeds.length > 0; else noAlerts">

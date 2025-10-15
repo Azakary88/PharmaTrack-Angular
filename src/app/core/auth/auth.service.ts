@@ -16,6 +16,11 @@ export class AuthService {
   public currentUser$ = this.currentUserSubject.asObservable();
   public isLoggedIn$ = this.currentUser$.pipe(map(user => !!user)); // Un observable qui renvoie true si l'utilisateur est connecté
 
+  // Un observable qui renvoie le rôle de l'utilisateur actuel
+  public userRole$: Observable<string | null> = this.currentUser$.pipe(
+    map(user => user ? user.role : null)
+  );
+  
   constructor(private http: HttpClient, private router: Router ) {
     // On pourrait ajouter ici une logique pour vérifier si l'utilisateur est déjà connecté (ex: via localStorage)
   }
