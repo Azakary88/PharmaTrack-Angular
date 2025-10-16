@@ -1,59 +1,47 @@
-# PharmaTrack
+# 💊 PharmaTrack
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.5.
+PharmaTrack est une application Angular permettant de gérer les stocks et la distribution de produits pharmaceutiques.
+Elle utilise Angular pour le front-end et json-server comme API simulée pour la gestion des données locales.
 
-## Development server
+# 🚀 Installation et exécution du projet
+1. Cloner le dépôt
+````bash
+git clone https://github.com/Azakary88/PharmaTrack-Angular.git
+````
+2. Se rendre dans le dossier du projet
 
-To start a local development server, run:
+````bash
+cd PharmaTrack-Angular
+````
+3. Installer les dépendances
+
+````bash
+npm install
+````
+4. Installer json-server (simulateur d’API)
+
+````bash
+npm install -g json-server
+````
+5. Démarrer le serveur JSON
+
+Ce serveur permet de simuler une base de données locale à partir du fichier db.json.
+
+````bash
+json-server --watch db.json
+
+````
+# 👉 Par défaut, le serveur tourne sur :
+http://localhost:3000
+
+6. Lancer l’application Angular
+
+Dans un autre terminal :
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+# Puis ouvre ton navigateur à l’adresse :
+👉 http://localhost:4200
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
