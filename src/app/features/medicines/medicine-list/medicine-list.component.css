@@ -82,5 +82,5 @@ dialog {
 /* Fond semi-transparent derrière la modale */
 dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(2px); /* Effet de flou (support variable) */
+  /*backdrop-filter: blur(2px); /* Effet de flou (support variable) */
 }

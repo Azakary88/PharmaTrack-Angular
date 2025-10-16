@@ -25,7 +25,7 @@
 .logo-column {
   flex: 1; /* Prend la moitié de l'espace */
   padding: 40px;
-  background-color: var(--primary-color, #3f51b5);
+  background-color:  #0aaf05;
   color: white;
   display: flex;
   flex-direction: column;
@@ -64,7 +64,7 @@
 
 .login-card h2 {
   text-align: center;
-  color: var(--primary-color, #3f51b5);
+  color:  #0aaf05;
   margin-top: 0;
   margin-bottom: 30px;
   font-size: 1.6em;
@@ -92,7 +92,7 @@ input {
 button {
   width: 100%;
   padding: 12px;
-  background-color: var(--primary-color, #3f51b5);
+  background-color: #0aaf05;
   color: white;
   border: none;
   border-radius: 5px;
@@ -108,7 +108,7 @@ button:disabled {
 }
 
 button:hover:not(:disabled) {
-  background-color: #303f9f;
+  background-color: #ebd514;
 }
 
 .error-message {
