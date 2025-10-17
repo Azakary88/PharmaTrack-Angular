@@ -43,11 +43,6 @@
     <div class="dashboard-card chart-card">
     <h2>Ventes de la semaine</h2>
 
-    <!-- 
-        On ajoute une condition *ngIf.
-        Le graphique ne sera ajouté au DOM que si 'salesChartData' existe ET a une longueur > 0.
-        Cela empêche le premier rendu "à vide" qui causait l'erreur.
-    -->
     <div *ngIf="salesChartData && salesChartData.length > 0" style="height: 400px;">
         <ngx-charts-bar-vertical
         [results]="salesChartData"

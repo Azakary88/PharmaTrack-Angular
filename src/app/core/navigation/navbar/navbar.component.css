@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: green; /* Couleur primaire */
+  background-color: green; 
   padding: 0 20px;
   color: white;
   height: 60px;
@@ -39,8 +39,7 @@
   opacity: 0.8;
 }
 
-/* Cette classe sera ajoutée par routerLinkActive */
 .active-link {
-  border-bottom: 3px solid #ff4081; /* Couleur d'accentuation */
+  border-bottom: 3px solid #ff4081; 
   padding-bottom: 5px;
 }

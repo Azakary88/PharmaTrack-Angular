@@ -64,7 +64,7 @@ export class DashboardComponent implements OnInit {
 
     //  On calcule le nombre de ventes du jour
     this.dailySalesCount$ = todaysSales$.pipe(
-      map(sales => sales.length) // C'est simplement la longueur du tableau des ventes du jour
+      map(sales => sales.length) 
     );
 
     
@@ -88,8 +88,6 @@ export class DashboardComponent implements OnInit {
         });
       }
 
-      //  On assigne le résultat final à notre propriété de classe.
-      // L'astuce [...weeklySales] force Angular à détecter le changement.
         setTimeout(() => {
         this.salesChartData = [...weeklySales];
         console.log("Données assignées au graphique (avec setTimeout):", this.salesChartData);

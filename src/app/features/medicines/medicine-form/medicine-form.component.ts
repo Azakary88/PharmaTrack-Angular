@@ -10,7 +10,7 @@ import { Medicine } from '../../../shared/models/medicine.model';
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule // 2. L'ajouter aux imports
+    ReactiveFormsModule 
   ],
   templateUrl: './medicine-form.component.html',
   styleUrls: ['./medicine-form.component.css']
@@ -24,8 +24,7 @@ export class MedicineFormComponent implements OnChanges {
 
   constructor(private fb: FormBuilder, private medicineService: MedicineService) {
     this.medicineForm = this.fb.group({
-      id: [null], // 3. On ajoute l'ID au formulaire, il sera caché.
-      name: ['', Validators.required],
+      id: [null],
       category: ['', Validators.required],
       price: [0, [Validators.required, Validators.min(1)]],
       quantity: [0, [Validators.required, Validators.min(0)]],
@@ -72,7 +71,6 @@ export class MedicineFormComponent implements OnChanges {
     this.formClosed.emit();
   }
   
-  // --- NOUVELLE MÉTHODE DE RÉINITIALISATION ---
   private resetForm(): void {
     this.medicineForm.reset(); // Réinitialise les valeurs du formulaire
     this.isEditMode = false;   // Repasse en mode "ajout"

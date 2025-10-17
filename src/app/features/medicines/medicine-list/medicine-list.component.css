@@ -47,7 +47,7 @@ tbody tr:hover {
 
 /* On utilise les variables de couleur pour l'alerte */
 .low-stock {
-  background-color: var(--danger-background-color) !important; /* !important pour surcharger le hover */
+  background-color: var(--danger-background-color) !important; 
   color: var(--danger-color);
   font-weight: bold;
 }
@@ -82,5 +82,4 @@ dialog {
 /* Fond semi-transparent derrière la modale */
 dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.4);
-  /*backdrop-filter: blur(2px); /* Effet de flou (support variable) */
 }

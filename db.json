@@ -21,7 +21,7 @@
       "name": "Lumarthem pour enfant 1",
       "category": "antipalu",
       "price": 300,
-      "quantity": 74,
+      "quantity": 68,
       "expirationDate": "2026-10-10"
     },
     {
@@ -229,6 +229,13 @@
       "quantity": 1,
       "saleDate": "2025-10-15T06:13:35.658Z",
       "totalPrice": 2500
+    },
+    {
+      "id": "b3c5",
+      "medicineId": "a6e1",
+      "quantity": 6,
+      "saleDate": "2025-10-17T22:06:26.894Z",
+      "totalPrice": 1800
     }
   ],
   "users": [

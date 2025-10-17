@@ -1,7 +1,4 @@
 // src/app/features/medicines/medicine-list/medicine-list.component.ts
-
-// --- PARTIE 1 : LES IMPORTS ---
-// On s'assure d'avoir tous les imports nécessaires
 import { FormsModule } from '@angular/forms';
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -12,8 +9,6 @@ import { MedicineService } from '../../../core/services/medicine.service';
 import { MedicineFormComponent } from '../medicine-form/medicine-form.component';
 
 
-// --- PARTIE 2 : LE DÉCORATEUR @Component (À NE PAS SUPPRIMER) ---
-// C'est ce bloc qui définit le composant.
 @Component({
   selector: 'app-medicine-list',
   standalone: true,
@@ -39,7 +34,7 @@ export class MedicineListComponent implements OnInit {
 
     constructor(private medicineService: MedicineService) {}
 
-    // 7. Utiliser le hook ngOnInit pour initialiser la logique de filtrage
+    // Utiliser le hook ngOnInit pour initialiser la logique de filtrage
     ngOnInit(): void {
       // On combine le flux de tous les médicaments avec le flux du terme de recherche
       this.filteredMedicines$ = combineLatest([
@@ -59,22 +54,20 @@ export class MedicineListComponent implements OnInit {
       );
     }
 
-    // 8. Méthode appelée à chaque changement dans le champ de recherche
+    // Méthode appelée à chaque changement dans le champ de recherche
     onSearchChange(term: string): void {
       this.searchTerm.next(term);
     }
-
-  // Méthodes
-   openAddModal(): void {
-    // 1. On appelle manuellement la méthode reset() du composant enfant
+       openAddModal(): void {
+    // On appelle manuellement la méthode reset() du composant enfant
     if (this.medicineForm) {
       this.medicineForm.reset();
     }
     
-    // 2. On s'assure que selectedMedicine est null (ce qui est déjà le cas)
+    // On s'assure que selectedMedicine est null (ce qui est déjà le cas)
     this.selectedMedicine = null;
     
-    // 3. On ouvre la modale
+    // On ouvre la modale
     this.formDialog.nativeElement.showModal();
   }
   openEditModal(medicine: Medicine): void {
